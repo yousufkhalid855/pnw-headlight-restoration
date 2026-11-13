@@ -1,4 +1,5 @@
 const brandLogo = "/images/pnw-logo.png";
+const brandLogoLight = "/images/pnw-logo-light.png";
 import cloudyCloseup from "@/assets/pnw/cloudy-headlight-closeup.webp";
 import clearDetail from "@/assets/pnw/clear-headlight-front-detail.webp";
 import redComparison from "@/assets/pnw/red-car-before-after.webp";
@@ -20,6 +21,7 @@ export const BUSINESS = {
 
 export const ASSETS = {
   logo: brandLogo,
+  logoLight: brandLogoLight,
   hero: clearDetail,
   cloudyCloseup,
   clearDetail,

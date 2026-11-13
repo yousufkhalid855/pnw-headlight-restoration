@@ -31,7 +31,7 @@ function ServiceDetailPage() {
 
   return (
     <>
-      <section className="service-detail-hero">
+      <section className="service-detail-hero photo-hero">
         <div className="wrap service-detail-hero__layout">
           <div className="service-detail-hero__content"><Eyebrow>{page.eyebrow}</Eyebrow><h1>{page.title.split(" & ").map((word, i) => <span key={`${word}-${i}`}>{word}{i === 0 && page.title.includes(" & ") ? <> &<br /></> : <>{i === 0 ? <br /> : null}</>}</span>)}</h1><p>{page.description}</p><ActionLink href="/request-a-quote">Ask about this service</ActionLink></div>
           <figure className="service-detail-hero__figure"><Photo src={page.image} alt={page.imageAlt} eager /><figcaption>Supplied business photograph · Vehicle-specific results vary</figcaption></figure>

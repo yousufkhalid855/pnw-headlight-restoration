@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import { ContactStrip, Eyebrow, PageIntro } from "@/components/pnw/pnw-site";
-import { BUSINESS } from "@/lib/pnw-data";
+import { ASSETS, BUSINESS } from "@/lib/pnw-data";
 import { getPageOrigin } from "@/lib/meta.functions";
 import { businessPageHead } from "@/lib/pnw-metadata";
 
@@ -22,7 +22,7 @@ export const Route = createFileRoute("/faq")({ loader: () => getPageOrigin(), he
 
 function FAQPage() {
   return <>
-    <PageIntro eyebrow="Answers before you call" title={<>Good to <span>know.</span></>} description="Questions about the lighting services PnW offers. Vehicle-specific details? Call PnW directly." />
+    <PageIntro image={ASSETS.silverBefore} eyebrow="Answers before you call" title={<>Good to <span>know.</span></>} description="Questions about the lighting services PnW offers. Vehicle-specific details? Call PnW directly." />
     <section className="faq-section wrap"><div className="faq-intro"><Eyebrow>Frequently asked questions</Eyebrow><p>Don't see your question? Call PnW to ask about your vehicle.</p><a href={BUSINESS.phoneHref}>{BUSINESS.phone}</a></div><div className="faq-list">{QUESTIONS.map(([question, answer], index) => <details className="faq-item" key={question}><summary><span className="faq-item__number">{String(index + 1).padStart(2, "0")}</span><span>{question}</span><span className="faq-item__toggle" aria-hidden="true">+</span></summary><p>{answer}</p></details>)}</div></section>
     <ContactStrip headline="Still have a question? Call PnW." />
   </>;

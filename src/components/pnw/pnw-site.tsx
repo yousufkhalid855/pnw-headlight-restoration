@@ -15,13 +15,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { ASSETS, BUSINESS, MAIN_NAV, SERVICES, type Service, type ServicePath } from "@/lib/pnw-data";
 
-export function BrandLogo({ className = "" }: { className?: string }) {
+export function BrandLogo({ className = "", onDark = false }: { className?: string; onDark?: boolean }) {
   return (
     <img
-      src={ASSETS.logo}
+      src={onDark ? ASSETS.logoLight : ASSETS.logo}
       className={className}
-      width={910}
-      height={212}
+      width={867}
+      height={173}
       alt="PnW Headlight Restoration"
     />
   );
@@ -97,7 +97,7 @@ function SiteFooter() {
       <div className="site-footer__main wrap">
         <div className="site-footer__identity">
           <Link to="/" aria-label="PnW Headlight Restoration home">
-            <BrandLogo className="site-footer__logo" />
+            <BrandLogo className="site-footer__logo" onDark />
           </Link>
           <p>Automotive lighting restoration in Bellingham, Washington.</p>
           <a className="footer-phone" href={BUSINESS.phoneHref}>
@@ -258,13 +258,13 @@ export function SiteLayout({ children }: { children: ReactNode }) {
       <a className="skip-link" href="#main-content">Skip to content</a>
       {!preloaderFinished && (
         <div className="site-preloader" aria-label="Loading PnW Headlight Restoration" aria-live="polite">
-          <BrandLogo className="site-preloader__logo" />
+          <BrandLogo className="site-preloader__logo" onDark />
           <div className="site-preloader__track"><span /></div>
           <span className="site-preloader__label">Bellingham, Washington</span>
         </div>
       )}
       <div ref={curtainRef} className="route-curtain" aria-hidden="true">
-        <BrandLogo className="route-curtain__logo" />
+        <BrandLogo className="route-curtain__logo" onDark />
         <span className="route-curtain__label">{BUSINESS.area}</span>
       </div>
       <SiteHeader />
@@ -278,19 +278,31 @@ export function Eyebrow({ children }: { children: ReactNode }) {
   return <span className="eyebrow"><span aria-hidden="true" />{children}</span>;
 }
 
+/** Full-bleed photo behind a page hero (the hero gets the `photo-hero` class). */
+export function HeroBackdrop({ src }: { src: string }) {
+  return (
+    <div className="hero-backdrop" aria-hidden="true">
+      <img src={src} alt="" fetchPriority="high" />
+    </div>
+  );
+}
+
 export function PageIntro({
   eyebrow,
   title,
   description,
+  image,
   children,
 }: {
   eyebrow: string;
   title: ReactNode;
   description: string;
+  image?: string;
   children?: ReactNode;
 }) {
   return (
-    <section className="page-intro">
+    <section className={image ? "page-intro photo-hero" : "page-intro"}>
+      {image && <HeroBackdrop src={image} />}
       <div className="wrap page-intro__inner">
         <Eyebrow>{eyebrow}</Eyebrow>
         <h1>{title}</h1>
