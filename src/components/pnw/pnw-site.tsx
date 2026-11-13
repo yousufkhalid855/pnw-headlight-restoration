@@ -163,11 +163,14 @@ export function SiteLayout({ children }: { children: ReactNode }) {
       const curtain = curtainRef.current;
       const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       if (reduced) {
-        gsap.set(curtain, { yPercent: -105 });
+        gsap.set(curtain, { y: 0, yPercent: -105 });
         setPreloaderFinished(true);
         return;
       }
+      // Clear the CSS translateY(102%) GSAP reads as a fixed pixel offset, or the
+      // curtain stops near the top of the screen and keeps covering the page.
       exitAnimation = gsap.to(curtain, {
+        y: 0,
         yPercent: -105,
         duration: 0.8,
         delay: 0.7,
@@ -195,10 +198,10 @@ export function SiteLayout({ children }: { children: ReactNode }) {
       const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       const curtain = curtainRef.current;
       if (reduced) {
-        gsap.set(curtain, { yPercent: -105 });
+        gsap.set(curtain, { y: 0, yPercent: -105 });
         return;
       }
-      gsap.set(curtain, { yPercent: 100 });
+      gsap.set(curtain, { y: 0, yPercent: 100 });
       transition = gsap.timeline().to(curtain, {
         yPercent: 0,
         duration: 0.4,
