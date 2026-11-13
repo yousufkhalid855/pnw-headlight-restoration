@@ -52,8 +52,9 @@ function CompareSlider() {
       ref={containerRef}
       className="comparison-slider"
       style={{ "--compare-position": `${position}%` } as React.CSSProperties}
-      onPointerMove={(event) => { if (event.buttons === 1) update(event.clientX); }}
-      onPointerDown={(event) => { event.currentTarget.setPointerCapture(event.pointerId); update(event.clientX); }}
+      onPointerMove={(event) => { if (event.currentTarget.hasPointerCapture(event.pointerId)) update(event.clientX); }}
+      onPointerDown={(event) => { event.preventDefault(); event.currentTarget.setPointerCapture(event.pointerId); update(event.clientX); }}
+      onPointerUp={(event) => { if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId); }}
       role="group"
       aria-label="Compare the supplied red car headlight before and after photographs"
     >
